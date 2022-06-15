@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { deleteMovie, getMovies } from '../services/fakeMovieService';
+import { getMovies } from '../services/fakeMovieService';
 
 class Movies extends Component {
     constructor() {
@@ -15,8 +15,10 @@ class Movies extends Component {
 
 
     handleDelete = (movieId) => {
-        deleteMovie(movieId);
-        this.setState({}, () => { });
+        const movies = this.state.movies.filter((movies) => {
+            return movies._id !== movieId;
+        });
+        this.setState({ movies });
     }
 
 
@@ -54,7 +56,7 @@ class Movies extends Component {
                                 <td key={movie.genre.name}>{movie.genre.name}</td>
                                 <td key={movie.numberInStock}>{movie.numberInStock}</td>
                                 <td key={movie.dailyRentalRate}>{movie.dailyRentalRate}</td>
-                                <td key={`${movie._id} button`}><button onClick={() => this.handleDelete(movie._id)} key={movie._id}>Delete</button></td>
+                                <td key={`${movie._id} button`}><button onClick={() => this.handleDelete(movie._id)} key={movie._id} className='btn btn-danger btn-sm'>Delete</button></td>
                             </tr>
                         );
                     })}
