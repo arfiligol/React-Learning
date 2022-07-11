@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { getMovies } from '../services/fakeMovieService';
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService";
 
 class Movies extends Component {
     state = {
-        movies: getMovies()
+        movies: getMovies(),
     };
 
     handleDelete = (movie) => {
@@ -15,12 +15,12 @@ class Movies extends Component {
 
     render() {
         if (this.state.movies.length === 0) {
-            return <p>There are no movies in the database.</p>
+            return <p>There are no movies in the database.</p>;
         }
 
         return (
             <React.Fragment>
-                <p>Showing {count} movies in the database.</p>
+                {/* <p>Showing {props.count} movies in the database.</p> */}
                 <table className="table">
                     <thead>
                         <tr>
@@ -32,13 +32,26 @@ class Movies extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.movies.map(movie => (
+                        {this.state.movies.map((movie) => (
                             <tr key={movie._id}>
                                 <td key={movie.title}>{movie.title}</td>
-                                <td key={movie.genre.name}>{movie.genre.name}</td>
-                                <td key={movie.numberInStock}>{movie.numberInStock}</td>
-                                <td key={movie.dailyRentaRate}>{movie.dailyRentaRate}</td>
-                                <td><button onClick={() => this.handleDelete(movie)} className="btn btn-danger btn-sm">Delete</button></td>
+                                <td key={movie.genre.name}>
+                                    {movie.genre.name}
+                                </td>
+                                <td key={movie.numberInStock}>
+                                    {movie.numberInStock}
+                                </td>
+                                <td key={movie.dailyRentaRate}>
+                                    {movie.dailyRentaRate}
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={() => this.handleDelete(movie)}
+                                        className="btn btn-danger btn-sm"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
